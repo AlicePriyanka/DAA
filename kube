@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+
+Verify the Setup:
+o Open a terminal and type:
+bash
+kubectl version --client
+kubectl cluster-info
+
+Apply the Deployment:
+• Save the YAML file and run:
+bash
+kubectl apply -f nginx-deployment.yaml
+Check the Pods:
+
+• Verify the deployment and running pods:
+Bash
+kubectl get pods
+
+4. Expose the Application
+1. Create a Service:
+
+kubectl expose deployment nginx-deployment --type=NodePort --name=nginx-service
+Get the Service Details:
+
+• Find the port to access the service:
+bash
+kubectl get svc
+
+
+. Manage the Cluster
+• Scale the Deployment:
+bash
+kubectl scale deployment nginx-deployment --replicas=4
+
+Verify the scaling:
+bash
+kubectl get pods
+
+Delete Resources:
+• To clean up:
+Bash
+kubectl delete svc nginx-service
+kubectl delete deployment nginx-deploymen
